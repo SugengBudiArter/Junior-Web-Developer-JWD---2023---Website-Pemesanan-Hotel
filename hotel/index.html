@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hotel Website</title>
+  <link rel="stylesheet" href="cssIndex.css">
+</head>
+<body>
+  <header>
+    <h1>Selamat Datang di Hotel Mahkota</h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Produk</a></li>
+        <li><a href="daftar-harga.html">Daftar Harga</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="Booking.html">Pesan Kamar</a></li>
+        <li><a href="listBooking.php">History List</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+
+  <main>
+
+      <center><h2>List Kamar</h2></center>
+      <div class="room-types">
+        
+        <div class="room-type">
+          <h3>Kamar Standar</h3>
+          <center><button onclick="redirectToBooking('Kamar Standar')">Pesan Kamar Standar</button></center>
+          <div class="media-content">
+            <img src="img/standart1.jpg" alt="Kamar Standar 1">
+
+            <img src="img/standart2.jpg" alt="Kamar Standar 2">
+
+            <img src="img/standart4.jpg" alt="Kamar Standar 2">
+            <video controls>
+              <source src="video/1.mp4" type="video/mp4">
+
+              Maaf, browser Anda tidak mendukung tag video.
+            </video>
+          </div>
+
+        </div>
+  
+        <div class="room-type">
+          <h3>Kamar Deluxe</h3>
+          <center><button onclick="redirectToBooking('Kamar Deluxe')">Pesan Kamar Deluxe</button></center>
+          <div class="media-content">
+            <img src="img/deluxe1.jpg" alt="Kamar Deluxe 2">
+            <img src="img/deluxe2.jpg" alt="Kamar Deluxe 2">
+
+            <img src="img/deluxe3.jpg" alt="Kamar Deluxe 2">
+            <video controls>
+              <source src="http://bit.ly/3SPMnWe" type="video/mp4">
+
+              Maaf, browser Anda tidak mendukung tag video.
+            </video>
+          </div>
+
+        </div>
+  
+        <div class="room-type">
+          <h3>Kamar Executive</h3>
+          <center><button onclick="redirectToBooking('Kamar Executive')">Pesan Kamar Executive</button></center>
+          <div class="media-content">
+            <img src="img/executive1.jpg" alt="Kamar Executive 1">
+
+            <img src="img/executive2.jpg" alt="Kamar Executive 2">
+
+            <img src="img/executive3.jpg" alt="Kamar Executive 2">
+            <video controls>
+              <source src="https://bit.ly/49JHynm" type="video/mp4">
+
+              Maaf, browser Anda tidak mendukung tag video.
+            </video>
+          </div>
+        </div>
+      </div>
+
+  </main>
+
+  <script>
+    function redirectToBooking(roomType) {
+      // Mengarahkan ke halaman Booking.html dengan parameter tipe kamar
+      window.location.href = `Booking.html?tipe=${roomType}`;
+    }
+  </script>
+
+  <footer>
+    <p>Hak Cipta © 2023 Hotel Mahkota</p>
+  </footer>
+</body>
+</html>

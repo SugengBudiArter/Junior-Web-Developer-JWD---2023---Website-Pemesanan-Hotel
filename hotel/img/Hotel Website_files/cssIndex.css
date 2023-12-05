@@ -1,0 +1,233 @@
+/* Reset default margin and padding */
+body, h1, h2, h3, p, ul, li, table {
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic styling */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header, main, footer {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+/* Reset margin dan padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+    /* Menambahkan gaya untuk mengatur tampilan gambar dan video */
+    .room-type {
+      margin-bottom: 20px;
+    }
+
+    .room-type h3 {
+      text-align: center;
+    }
+
+    .media-content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
+    .media-content img,
+    .media-content video {
+      max-width: 30%;
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .media-content img,
+      .media-content video {
+        max-width: 45%;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .media-content img,
+      .media-content video {
+        max-width: 100%;
+      }
+    }
+
+.flexbox{
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.flexbox div {
+  width: 40%;
+  background: green;
+  height: 30%;
+}
+.flexbox .one, .flexbox .two{
+  height: 45%;
+}
+
+
+/* Styling for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Styling for sections */
+#tentang-kami, #pesan-kamar {
+  margin-bottom: 30px;
+}
+
+/* Styling for the footer */
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #333;
+  color: #fff;
+}
+
+
+/* CSS untuk Navbar */
+.navbar {
+  background-color: #333; /* Warna latar belakang navbar */
+  overflow: hidden;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar ul li a {
+  display: inline-block;
+  padding: 16px;
+  text-decoration: none;
+  color: white; /* Warna teks link */
+}
+
+.navbar ul li a:hover {
+  background-color: #ddd; /* Warna latar belakang saat dihover */
+  color: black; /* Warna teks saat dihover */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='number'],
+select,
+button {
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+input[type='checkbox'] {
+  margin-bottom: 20px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+.tm {
+  position: relative;
+  /*width: 150px; height: 20px;*/
+  /*color: white;*/
+  
+  display: block;
+  width: 100%;
+  height: 2.4rem;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  box-shadow: inset 0 0 0 transparent;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  align-content: center;
+}
+
+.tm:before {
+  position: absolute;
+  top: 10px; left: 3px;
+  content: attr(data-date);
+  display: block;
+  color: #495057;
+}
+
+.tm::-webkit-datetime-edit, .tm::-webkit-inner-spin-button, .tm::-webkit-clear-button {
+  display: none;
+}
+
+.tm::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  color: #495057;
+}
+

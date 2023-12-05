@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pesan Kamar - Hotel Mahkota</title>
+  <link rel="stylesheet" href="cssIndex.css">
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+</html>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+    main {
+      padding: 20px;
+    }
+    #booking-form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #booking-form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    #booking-form input[type="text"],
+    #booking-form input[type="date"],
+    #booking-form input[type="number"],
+    #booking-form select,
+    #booking-form button {
+      width: calc(100% - 10px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    #booking-form button {
+      width: auto;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+    }
+    #booking-form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+    <h1>Selamat Datang di Hotel Mahkota</h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Produk</a></li>
+        <li><a href="daftar-harga.html">Daftar Harga</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="Booking.html">Pesan Kamar</a></li>
+        <li><a href="listBooking.php">History List</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="pesan-kamar">
+        <center><h2>Pesan Kamar</h2></center>
+
+        <form id="booking-form" action="proses_pesan.php" method="POST">
+          <label for="nama">Nama Pemesan:</label>
+          <input type="text" id="nama" name="nama" required><br><br>
+  
+          <label>Jenis Kelamin:</label><br>
+  
+            <div class="radio-container">
+              <input type="radio" id="laki-laki" name="jenis-kelamin" value="Laki-laki" required>
+              <label for="laki-laki">Laki-laki</label>
+              
+              <input type="radio" id="perempuan" name="jenis-kelamin" value="Perempuan" required>
+              <label for="perempuan">Perempuan</label>
+            </div>
+            <br><br>
+
+      
+          <label for="nomor-identitas">Nomor Identitas:</label>
+          <input type="text" id="nomor-identitas" name="nomor-identitas" required maxlength="16" required><br><br>
+      
+          <label for="tipe-kamar">Tipe Kamar:</label>
+          <select id="tipe-kamar" name="tipe-kamar" required onchange="updateHarga()">
+            <option value="" selected disabled onclick="redirectToBooking('Kamar Standar')">Pilih Tipe Kamar</option>
+            <option value="Kamar Standar" data-harga="200000">Kamar Standar</option>
+            <option value="Kamar Deluxe" data-harga="500000">Kamar Deluxe</option>
+            <option value="Kamar Executive" data-harga="1000000">Kamar Executive</option>
+          </select><br><br>
+          
+          <label for="harga">Harga:</label>
+          <input class="tm form-control" type="text" id="harga" name="harga" readonly><br><br>
+      
+          <label for="tanggal-pesan">Tanggal Pesan:</label>
+          <input type="text" id="tanggal-pesan" name="tanggal-pesan" placeholder="dd/mm/yyyy" required><br><br>
+
+      
+          <label for="durasi-menginap">Durasi Menginap (hari):</label>
+          <input type="number" id="durasi-menginap" name="durasi-menginap" required><br><br>
+      
+          <label for="breakfast" >Pesan Breakfast? + Rp. 80.000/Day</label>
+          <input type="checkbox" id="breakfast" name="breakfast" value="Ya"> Ya<br><br>
+      
+          <label for="total-bayar">Total Bayar:</label>
+          <input type="text" id="total-bayar" name="total-bayar"><br><br>
+      
+          <!-- Button untuk menghitung total harga -->
+          <button type="button" onclick="hitungTotal()">Hitung Total Harga</button>
+          <button type="submit" onclick="saveData()">Simpan</button>
+          <button type="button" onclick="clearForm()">Cancel</button>
+        </form>
+
+      </section>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+    <script>
+      document.getElementById("nomor-identitas").addEventListener("input", function() {
+          // Menghapus karakter selain angka dari nilai input
+          this.value = this.value.replace(/\D/g, '');
+      });
+      </script>
+      
+    <script>
+
+    $(function() {
+      $("#tanggal-pesan").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+      });
+    });
+
+
+
+
+    let durasiMenginapInput = document.getElementById('durasi-menginap');
+    durasiMenginapInput.addEventListener('input', function() {
+      let durasiMenginapValue = durasiMenginapInput.value;
+
+  // Validasi jika nilai yang dimasukkan bukan angka
+    if (isNaN(durasiMenginapValue) || durasiMenginapValue === "" || durasiMenginapValue <= 0) {
+        alert('Input Harus Angka');
+        durasiMenginapInput.value = ""; // Kosongkan nilai input jika tidak valid
+      }
+    });
+      
+      function updateHarga() {
+        const selectElement = document.getElementById('tipe-kamar');
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const selectedPrice = selectedOption.getAttribute('data-harga');
+
+        document.getElementById('harga').value = selectedPrice;
+
+        // Update total bayar jika durasi menginap telah diisi
+        hitungTotal();
+      }
+
+      function hitungTotal() {
+        let nomorIdentitas = document.getElementById('nomor-identitas').value;
+        let hargaKamar = parseFloat(document.getElementById('harga').value);
+        let durasiMenginap = parseInt(document.getElementById('durasi-menginap').value);
+        let inputDate = document.getElementById('tanggal-pesan').value;
+
+        let totalBayar = hargaKamar * durasiMenginap;
+
+        // Diskon 10% jika durasi menginap 3 hari atau lebih
+        if (durasiMenginap >= 3) {
+          totalBayar *= 0.9; // Mengurangi 10%
+        }
+
+        // Penambahan biaya jika pesan breakfast
+        if (document.getElementById('breakfast').checked) {
+          totalBayar += durasiMenginap * 80000;
+        }
+
+        document.getElementById('total-bayar').value = totalBayar;
+      }
+
+      function clearForm() {
+        document.getElementById('booking-form').reset();
+      }
+
+      function saveData() {
+
+        let nomorIdentitas = document.getElementById('nomor-identitas').value;
+        // Validasi Nomor Identitas harus 16 digit
+          if (nomorIdentitas.length !== 16 || isNaN(nomorIdentitas) ) {
+            alert('Isian salah. Data Identitas Harus 16 digit angka.');
+            return; // Hentikan proses jika validasi tidak terpenuhi
+        }
+  // Simpan data menggunakan AJAX
+      $.ajax({
+        type: 'POST',
+        data: $('#booking-form').serialize(), // Mengambil data formulir
+        success: function(response) {
+          alert('Data berhasil disimpan ke dalam database!');
+          header("Location:listBooking.php");
+        },
+        error: function(xhr, status, error) {
+          alert('Terjadi kesalahan: ' + error);
+        }
+      });
+    }
+    </script>
+
+  </main>
+
+  <footer>
+    <p>Hak Cipta © 2023 Hotel Mahkota</p>
+  </footer>
+</body>
+</html>

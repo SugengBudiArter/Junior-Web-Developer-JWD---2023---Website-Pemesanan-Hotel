@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tentang Kami - Hotel Mahkota</title>
+  <link rel="stylesheet" href="cssIndex.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    #deskripsiHotel {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Selamat Datang di Hotel Mahkota</h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Produk</a></li>
+        <li><a href="daftar-harga.html">Daftar Harga</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="Booking.html">Pesan Kamar</a></li>
+        <li><a href="listBooking.php">History List</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tentang-kami">
+      <center><h2>Tentang Kami</h2></center>
+      <p id="deskripsiHotel"></p>
+      <h3>Kontak Kami</h3>
+      <p>Telepon: <a href="tel:+6282337994456">082337994456</a></p>
+      <p>Email: <a href="mailto:mahkota1234@gmail.com">mahkota1234@gmail.com</a></p>
+      <p>Alamat: <a href="https://maps.app.goo.gl/vyQrSxGjCF9C83nC8" target="_blank">Ngaglik, Kec. Batu, Kota Batu, Jawa Timur</a></p>
+    </section>
+  </main>
+
+  <script>
+    fetch('dll/deskripsi.txt')
+    .then(response => response.text())
+      .then(data => {
+        const deskripsi = document.getElementById('deskripsiHotel');
+        const paragraphs = data.split('\n\n'); // Memisahkan teks menjadi paragraf berdasarkan baris kosong
+        paragraphs.forEach(paragraph => {
+          const p = document.createElement('p');
+          p.textContent = paragraph;
+          deskripsi.appendChild(p);
+        });
+      })
+      .catch(error => {
+        console.log('Terjadi kesalahan:', error);
+      });
+  </script>
+
+  <footer>
+    <p>Hak Cipta © 2023 Hotel Mahkota</p>
+  </footer>
+</body>
+</html>
